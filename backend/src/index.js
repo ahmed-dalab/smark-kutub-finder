@@ -8,6 +8,17 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./features/users/user.route.js";
 import authRouter from "./features/auth/auth.route.js";
 import {authenticate, authorize} from "./middlewares/auth.MIddleware.js";
+
+// routes
+import locationRoute from "./features/locations/locations.routes.js";
+import libraryRoute from "./features/libraries/libraries.routes.js";
+import cabinetRoute from "./features/cabinets/cabinets.routes.js";
+import shelfRoute from "./features/shelves/shelves.routes.js";
+import categoryRoute from "./features/categories/categories.routes.js";
+import bookRoute from "./features/books/books.routes.js";
+import volumeRoute from "./features/volumes/volumes.routes.js";
+import bookPlacementRoute from "./features/book-placements/book-placements.routes.js";
+
 const app = express()
 
 app.use(express.json())
@@ -36,6 +47,14 @@ app.get('/api/health', (req, res)=>{
 app.use('/api/users',authenticate, authorize('Admin'), userRoutes)
 // auth api
 app.use('/api/auth', authRouter)
+app.use("/api/locations", locationRoute);
+app.use("/api/libraries", libraryRoute);
+app.use("/api/cabinets", cabinetRoute);
+app.use("/api/shelves", shelfRoute);
+app.use("/api/categories", categoryRoute);
+app.use("/api/books", bookRoute);
+app.use("/api/volumes", volumeRoute);
+app.use("/api/book-placements", bookPlacementRoute);
 // 404 route
 app.use((req, res) => {
   res.status(404).json({

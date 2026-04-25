@@ -47,11 +47,11 @@ export default function Login() {
       const response = await login(values).unwrap();
 
      dispatch(
-  setCredentials({
-    accessToken: response.accessToken,
-    user: response.user,
-  })
-);
+        setCredentials({
+          accessToken: response.accessToken,
+          user: response.user,
+        })
+      );
       if (response.user.role === "Admin") {
         navigate("/admin", { replace: true });
         return;
